@@ -1,5 +1,6 @@
 package com.um.Control.dominio;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,9 +11,9 @@ public class Acceso {
 	private TipoAcceso tipo;
 	private String userId;
 	private int monitorId;
-	private LocalDateTime fechaHoraAcceso;
+	private LocalDate fechaHoraAcceso;
 
-	public Acceso(String id, TipoAcceso tipo, String userId, int monitorId, LocalDateTime fechaHoraAcceso) {
+	public Acceso(String id, TipoAcceso tipo, String userId, int monitorId, LocalDate fechaHoraAcceso) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -37,7 +38,7 @@ public class Acceso {
 		return monitorId;
 	}
 
-	public LocalDateTime getFechaHoraAcceso() {
+	public LocalDate getFechaHoraAcceso() {
 		return fechaHoraAcceso;
 	}
 	

@@ -6,16 +6,18 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.um.Control.config.RabbitMQConfig;
-import com.um.Control.dominio.Acceso;
-import com.um.Control.puertos.EventosPort;
+import com.um.Control.dto.AltaAccesoDTO;
+import com.um.Control.puertos.PuertoSalidaEventos;
 import com.um.Control.utils.JsonUtils;
 
-public class RabbitMQProductorAdapter implements EventosPort {
+public class RabbitMQProductorAdapter implements PuertoSalidaEventos {
 	
 	private final ObjectMapper objectMapper = JsonUtils.getMapper();
+	
+	public RabbitMQProductorAdapter() {}
 
 	@Override
-	public void altaAcceso(Acceso acceso) {
+	public void altaAcceso(AltaAccesoDTO acceso) {
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
 			factory.setUri(RabbitMQConfig.URI);

@@ -6,7 +6,7 @@ services:
       container_name: docker-mongodb
 
       environment:
-        MONGO_INITDB_DATABASE: accesos
+        MONGO_INITDB_DATABASE: accesos # CAMBIAR a nombre de documento (documento es como las tablas en MySql)
 
       ports:
         - "27017:27017"

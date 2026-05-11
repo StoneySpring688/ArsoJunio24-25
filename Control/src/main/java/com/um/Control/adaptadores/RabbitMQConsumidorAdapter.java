@@ -1,63 +1,67 @@
 package com.um.Control.adaptadores;
 
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
-import com.rabbitmq.client.AMQP;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.DeliverCallback;
 import com.um.Control.config.RabbitMQConfig;
 
 public class RabbitMQConsumidorAdapter {
 	
-	private static RabbitMQConsumidorAdapter instance;
-	private Channel channel;
+	private static final Gson gson = new Gson();
+	private final ConnectionFactory connectionFactory;
+    //private final PuertoEntradaEventos puertoEntradaEventos;
 	
-	private RabbitMQConsumidorAdapter() {
-		try {
-			ConnectionFactory factory = new ConnectionFactory();
-			factory.setUri(RabbitMQConfig.URI);
-			
-			Connection connection = factory.newConnection();
-			channel = connection.createChannel();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static RabbitMQConsumidorAdapter getInstance() {
-        if (instance == null) {
-            instance = new RabbitMQConsumidorAdapter();
-        }
-        return instance;
+    public RabbitMQConsumidorAdapter(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+        //this.puertoEntradaEventos = puertoEntradaEventos;
     }
 	
-	public void iniciarConsumo() {
-        boolean autoAck = false;
-        
+    /**
+     * Arranca el consumidor y empieza a escuchar.
+     * El exchange, las colas y los bindings se crean de forma centralizada mediante rabbitmq-definitons.json
+     */
+    public void iniciar() {
         try {
-        	channel.basicConsume(RabbitMQConfig.QUEUE, autoAck, RabbitMQConfig.ROUTINGKEY,
-                    new DefaultConsumer(channel) {
-                        @Override
-                        public void handleDelivery(String consumerTag, Envelope envelope,
-                                                   AMQP.BasicProperties properties, byte[] body) 
-                                                		   throws IOException {
-                        	String routingKey = envelope.getRoutingKey();
-                        	String contentType = properties.getContentType();
-                        	long deliveryTag = envelope.getDeliveryTag();
-                        	
-                        	String contenido = new String(body);
-                        	System.out.println(contenido);
-                        	
-                        	channel.basicAck(deliveryTag, false);
-                        }
-                    });
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String routingKey = delivery.getEnvelope().getRoutingKey();
+                String cuerpo = new String(delivery.getBody(), StandardCharsets.UTF_8);
+
+                try {
+                    Map<String, String> mensaje = gson.fromJson(cuerpo, new TypeToken<Map<String, String>>(){}.getType());
+                    recibirEvento(routingKey, mensaje);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            };
+
+            channel.basicConsume(RabbitMQConfig.QUEUE, true, deliverCallback, consumerTag -> {});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void recibirEvento(String routingKey, Map<String, String> mensaje) {
+    	try {
+			switch (routingKey) {
+			case RabbitMQConfig.ROUTINGKEY:
+				System.out.println(mensaje.toString());
+				break;
+			default:
+				break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
     }
 	
 }
