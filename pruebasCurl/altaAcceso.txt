@@ -9,4 +9,4 @@ curl -X POST http://localhost:8080/api/accesos \
           }'
 
 --- Para copiar y pegar en cmd ---
-curl -i -X POST http://localhost:8080/api/accesos -H "Content-Type: application/json" -d "{\"id\":\"acc-001\",\"tipo\":\"entrada\",\"userId\":\"usuario-123\",\"monitorId\":5,\"fechaHoraAcceso\":\"2026-05-11T10:30:00\"}"
+curl -i -X POST http://localhost:8080/api/accesos -H "Content-Type: application/json" -d "{\"id\":\"acc-001\",\"tipo\":\"entrada\",\"userId\":\"usuario-123\",\"monitorId\":5,\"fechaHoraAcceso\":\"2026-05-11\"}"

@@ -36,6 +36,7 @@ public class RestController {
 	@Produces(MediaType.TEXT_PLAIN)
 	@PermitAll
 	public String test() {
+		//throw new IllegalArgumentException();
 		return "API funcionando";
 	}
 

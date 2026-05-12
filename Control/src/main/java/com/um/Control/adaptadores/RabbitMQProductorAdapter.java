@@ -16,6 +16,9 @@ public class RabbitMQProductorAdapter implements PuertoSalidaEventos {
 	
 	public RabbitMQProductorAdapter() {}
 
+	/**
+	 * Adaptar tipo de datos al que corresponda
+	 **/
 	@Override
 	public void altaAcceso(AltaAccesoDTO acceso) {
 		try {

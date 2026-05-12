@@ -1,7 +1,6 @@
 package com.um.Control.dominio;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
