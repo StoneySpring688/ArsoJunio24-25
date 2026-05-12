@@ -15,7 +15,7 @@ import com.um.Control.dto.AltaAccesoDTO;
 import com.um.Control.servicio.FactoriaServicios;
 import com.um.Control.servicio.IServicioAcceso;
 
-@Path("/accesos")
+@Path("/api/accesos")
 public class RestController {
 
 	private IServicioAcceso servicio;
