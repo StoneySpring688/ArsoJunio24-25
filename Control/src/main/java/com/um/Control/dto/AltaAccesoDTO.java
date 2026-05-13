@@ -64,4 +64,9 @@ public class AltaAccesoDTO {
 		this.fechaHoraAcceso = fechaHoraAcceso;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return new String("{id: " + getId() + ", tipo: " + getTipo() + ", userId: " + getUserId() + ", monitorId: " + getMonitorId() + ", fechaHoraAcceso: " + getFechaHoraAcceso().toString() + "}");
+	}
 }

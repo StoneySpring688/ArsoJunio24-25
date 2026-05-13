@@ -16,16 +16,6 @@ import org.springframework.validation.FieldError;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	public static class RespuestaError {
-		private String estado;
-		private String mensaje;
-
-		public RespuestaError(String estado, String mensaje) {
-			this.estado = estado;
-			this.mensaje = mensaje;
-		}
-	}
-
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

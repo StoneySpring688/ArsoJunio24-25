@@ -20,7 +20,7 @@ public class RabbitMQTest
         PuertoSalidaEventos port = new RabbitMQProductorAdapter();
         port.altaAcceso(
 				new AltaAccesoDTO(UUID.randomUUID().toString(),
-						TipoAcceso.entrada, "usuario", 0, LocalDate.now())
+						TipoAcceso.ENTRADA, "usuario", 0, LocalDate.now())
 				);
         
         ConnectionFactory connectionFactory = RabbitMQConfig.crearConnectionFactory();

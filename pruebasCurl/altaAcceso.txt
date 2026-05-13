@@ -9,4 +9,8 @@ curl -X POST http://localhost:8080/api/accesos \
           }'
 
 --- Para copiar y pegar en cmd ---
+# Sin JWT
 curl -i -X POST http://localhost:8080/api/accesos -H "Content-Type: application/json" -d "{\"id\":\"acc-001\",\"tipo\":\"entrada\",\"userId\":\"usuario-123\",\"monitorId\":5,\"fechaHoraAcceso\":\"2026-05-11\"}"
+# Con JWT
+curl -i -X POST localhost:8080/api/auth/login -d "monitorId=1&clave=arso-2025"
+curl -i -X POST http://localhost:8080/api/accesos -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjEsInJvbGVzIjpbIkFETUlOIl0sImV4cCI6MTc3OTUyNzQzNX0.WpA3YpEZXXCFuYxGQ8TGKhA_8I0E6aGmNlV_5n0Zum3M9tLbyTkumRq9ZlXP9v5A37J9fB8k1K8l-B-mua0Cpw" -d "{\"id\":\"acc-001\",\"tipo\":\"entrada\",\"userId\":\"usuario-123\",\"monitorId\":1,\"fechaHoraAcceso\":\"2026-05-11\"}"

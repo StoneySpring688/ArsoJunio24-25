@@ -16,14 +16,14 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- Logging : SLF4J + Logback -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.36</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -55,7 +55,7 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>2.15.2</version>
 		</dependency>
-		
+
 		<!-- JAXB: solo es necesario si JDK > 8 -->
 
 		<dependency>
@@ -69,15 +69,16 @@
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.1</version>
 		</dependency>
-		
+
 		<!-- RabbitMQ -->
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>5.20.0</version>
 		</dependency>
-		
-		<!-- RabbitMQ: serialización JSON con Jackson 2.15.2 por JAX-RX usando esa versión de jackson, si no : 2.7.1 -->
+
+		<!-- RabbitMQ: serialización JSON con Jackson 2.15.2 por JAX-RX usando
+		esa versión de jackson, si no : 2.7.1 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -90,20 +91,32 @@
 			<version>2.7.1</version>
 		</dependency>
 		-->
-				
+
 		<!-- RabbitMQ: Gson para serializar/deserializar JSON de eventos -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
 		</dependency>
-		
+
 		<!-- Token JWT -->
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
+		</dependency>
+
+		<!-- Retrofit -->
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>retrofit</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-gson</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 
 		<!--Test -->
